@@ -41,29 +41,21 @@ hr{
 box-shadow: -2px 2px 15px 5px #000000;
 }
 
-/* .image-group{ */
-  /* display: flex;
-  flex-direction: column; */
-  /* position: fixed; */
-  /* background-color: red;
-   margin-top:30px;
-} */
 
 .cover{
-  width:100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height:70%;
 }
-
 .avatar-wrapper{
   background-color: white;
   position: fixed;
   left:50px;
   margin-top: 35%;
   padding:10px;
-  width:30%;
-  height:70%;
+  width:30vw;
+  height: 65vh;
   border-radius: 50px;
   border: 10px solid purple;
 }
@@ -158,7 +150,7 @@ h2{
 }
 
 .body-part{
-  width:80px;
+  width:60px;
 }
 
 @media (max-width: 1150px) {

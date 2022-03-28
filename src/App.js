@@ -98,16 +98,16 @@ function App() {
   const randomImageMouths = imagesMouths[Math.floor(Math.random() * imagesMouths.length)]
 
   const randomImage = [
-    { z_index: 100, name: "body", image: randomImageBody },
-    { z_index: 500, name: "glasses", image: randomImageGlasses },
-    { z_index: 300, name: "clothes1", image: randomImageClothes1 },
-    { z_index: 300, name: "clothes2", image: randomImageClothes2 },
-    { z_index: 300, name: "clothes3", image: randomImageClothes3 },
-    { z_index: 400, name: "eyes", image: randomImageEyes },
-    { z_index: 600, name: "hair", image: randomImageHair },
-    { z_index: 400, name: "eyebrows", image: randomImageEyebrows },
-    { z_index: 400, name: "mouths", image: randomImageMouths },
-    { z_index: 400, name: "nose", image: nose }
+    { id: "body", z_index: 100, name: "body", image: randomImageBody },
+    { id: "glasses", z_index: 500, name: "glasses", image: randomImageGlasses },
+    { id: "clothes1", z_index: 300, name: "clothes1", image: randomImageClothes1 },
+    { id: "clothes2 ", z_index: 300, name: "clothes2", image: randomImageClothes2 },
+    { id: "clothes3 ", z_index: 300, name: "clothes3", image: randomImageClothes3 },
+    { id: " eyes", z_index: 400, name: "eyes", image: randomImageEyes },
+    { id: " hair", z_index: 600, name: "hair", image: randomImageHair },
+    { id: "eyebrows", z_index: 400, name: "eyebrows", image: randomImageEyebrows },
+    { id: "mouths", z_index: 400, name: "mouths", image: randomImageMouths },
+    { id: " nose", z_index: 400, name: "nose", image: nose }
   ]
   const [randomImages, setRandomImages] = useState(randomImage)
 
@@ -118,9 +118,12 @@ function App() {
   }
 
 
-  const handleClick = (img) => {
-    const images = randomImage.find((element) => element.image = img)
-    setRandomImages([...randomImages, images])
+  const handleClick = (partIndex, index) => {
+    setRandomImages([
+      ...randomImages.slice(0, partIndex),
+      { ...randomImages[partIndex], image: arrayCharacter[partIndex].images[index] },
+      ...randomImages.slice(partIndex + 1),
+    ])
   }
 
   return (
@@ -133,7 +136,7 @@ function App() {
           <form onSubmit={handleSubmit} className="avatar-wrapper">
             <div className="avatar">
               {randomImages.map((e) => (
-                <img z-index={e.z_index} src={e.image} className="first" ></img>
+                <img key={e.id} z-index={e.z_index} src={e.image} className="first" ></img>
               ))}
 
             </div>
@@ -145,13 +148,13 @@ function App() {
       </div>
       <div>
         {/* THIS IS COMPONENT ... */}
-        {imagesSource.map((e) => (
-          <div className="list-image">
+        {imagesSource.map((e, partIndex) => (
+          <div key={partIndex} className="list-image">
             <h2>{e.name}</h2>
             <div className="list">
-              {e.images.map((image) =>
-              (<div className="clickable">
-                <img src={image} onClick={() => handleClick(image)} name="body" className="body-part "></img>
+              {e.images.map((image, index) =>
+              (<div key={index} className="clickable">
+                <img src={image} onClick={() => handleClick(partIndex, index)} name="body" className="body-part "></img>
               </div>)
               )}
             </div>
